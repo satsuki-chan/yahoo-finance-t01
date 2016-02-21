@@ -270,18 +270,18 @@ for cfound in list_founds:
                                 found_error.write("-Error-[{}]: No valid historical record. Used code: '{}', raw record: \"{}\"\n".format(cfound[0], name_found, hday))
                             else:
                                 #print '"{}", "{}", {}'.format(cfound[0], hday['Date'], hday['Close'])
-                                found_data.write('"{}", "{}", {}\n'.format(cfound[0], hday['Date'], hday['Close']))
+                                found_data.write('"{}","{}",{}\n'.format(cfound[0], hday['Date'], hday['Close']))
                         hdata_found += 1
                         found_data.flush()
                         os.fsync(found_data.fileno())
                     except JSONDecodeError:
-                        found_error.write("Warning[{}]: Network failure while retriving historical records. Used code: '{}'\n".format(cfound[0], name_found))
+                        found_error.write("-Error-[{}]: Network failure while retriving historical records. Used code: '{}'\n".format(cfound[0], name_found))
                         pass
             except JSONDecodeError:
-                found_error.write("Warning[{}]: Network failure while retriving found information. Used code: '{}'\n".format(cfound[0], name_found))
+                found_error.write("-Error-[{}]: Network failure while retriving found information. Used code: '{}'\n".format(cfound[0], name_found))
                 pass
         except JSONDecodeError:
-            found_error.write("Warning[{}]: Network failure while creating found object. Used code: '{}'\n".format(cfound[0], name_found))
+            found_error.write("-Error-[{}]: Network failure while creating found object. Used code: '{}'\n".format(cfound[0], name_found))
             pass
 
         hday = None
